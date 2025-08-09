@@ -10,6 +10,7 @@ public class AccountBalanceCalculator {
     // Method to calculate balance based on transactions
     public static int calculateBalance(List<Transaction> transactions) {
         int balance = 0;
+        clearTransactionHistory();
         for (Transaction t : transactions) {
             if (t.getType() == TransactionType.DEPOSIT) {
                 balance += t.getAmount();
@@ -20,6 +21,7 @@ public class AccountBalanceCalculator {
                 }
                 balance -= t.getAmount();
             }
+            addTransaction(t);
         }
         return balance;
     }

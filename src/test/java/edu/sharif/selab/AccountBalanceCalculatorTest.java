@@ -65,7 +65,7 @@ public class AccountBalanceCalculatorTest {
         List<Transaction> history = AccountBalanceCalculator.getTransactionHistory();
         assertTrue(history.isEmpty(), "Transaction history should be empty before calculating balance");
     }
-/*
+
     @Test
     void testTransactionHistoryAfterDeposits() {
         // Perform deposits
@@ -134,7 +134,7 @@ public class AccountBalanceCalculatorTest {
         assertTrue(historyAfterSecondCalc.containsAll(secondTransactions), "Transaction history should contain the second set of transactions");
         assertFalse(historyAfterSecondCalc.containsAll(firstTransactions), "Transaction history should not contain the first set of transactions after the second calculation");
     }
- */
+
     @Test
     void testWithdrawalExceedingBalanceShouldThrowException() {
         // ARRANGE: A list of transactions where withdrawal is greater than deposit
