@@ -134,6 +134,19 @@ public class AccountBalanceCalculatorTest {
         assertTrue(historyAfterSecondCalc.containsAll(secondTransactions), "Transaction history should contain the second set of transactions");
         assertFalse(historyAfterSecondCalc.containsAll(firstTransactions), "Transaction history should not contain the first set of transactions after the second calculation");
     }
-
  */
+    @Test
+    void testWithdrawalExceedingBalanceShouldThrowException() {
+        // ARRANGE: A list of transactions where withdrawal is greater than deposit
+        List<Transaction> transactions = Arrays.asList(
+                new Transaction(TransactionType.DEPOSIT, 100),
+                new Transaction(TransactionType.WITHDRAWAL, 150) // This should not be allowed
+        );
+
+        // ACT & ASSERT: We expect the calculateBalance method to throw an
+        // IllegalArgumentException when this operation is attempted.
+        assertThrows(IllegalArgumentException.class, () -> {
+            AccountBalanceCalculator.calculateBalance(transactions);
+        }, "Should throw an exception for withdrawals leading to a negative balance");
+    }
 }

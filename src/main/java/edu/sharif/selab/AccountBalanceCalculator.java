@@ -14,9 +14,12 @@ public class AccountBalanceCalculator {
             if (t.getType() == TransactionType.DEPOSIT) {
                 balance += t.getAmount();
             } else if (t.getType() == TransactionType.WITHDRAWAL) {
+                // THE FIX: Check if balance is sufficient before withdrawal
+                if (balance < t.getAmount()) {
+                    throw new IllegalArgumentException("Withdrawal amount " + t.getAmount() + " exceeds the current balance of " + balance);
+                }
                 balance -= t.getAmount();
             }
-
         }
         return balance;
     }
